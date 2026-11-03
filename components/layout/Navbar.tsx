@@ -3,22 +3,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-const navLinks = [
-  { href: '/', label: 'Overview' },
-  { href: '/research', label: 'Research & Gaps' },
-  { href: '/subsystems', label: 'Subsystems' },
-  { href: '/results', label: 'Field Results' },
-  { href: '/team', label: 'Investigators' },
-  { href: '/publications', label: 'Publications' },
-];
+import { navItems } from '@/data/navigation';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
+    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center space-x-3">
@@ -32,7 +24,7 @@ export const Navbar: React.FC = () => {
           </Link>
 
           <nav className="hidden md:flex space-x-1 lg:space-x-2">
-            {navLinks.map((link) => {
+            {navItems.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
@@ -50,11 +42,11 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          <div className="hidden lg:flex items-center">
+          <div className="hidden lg:flex items-center space-x-3">
             <Link
               href="/docs/polycrop-final-thesis.pdf"
               target="_blank"
-              className="inline-flex items-center px-3.5 py-1.5 border border-slate-300 text-xs font-semibold rounded-md text-slate-700 bg-white hover:bg-slate-50 transition-colors shadow-sm"
+              className="inline-flex items-center px-3.5 py-1.5 border border-slate-200 text-xs font-semibold rounded-md text-slate-700 bg-white hover:bg-slate-50 transition-colors shadow-sm"
             >
               PDF Thesis
             </Link>
@@ -64,7 +56,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-              aria-label="Toggle Navigation"
+              aria-label="Toggle navigation"
             >
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {mobileMenuOpen ? (
@@ -80,7 +72,7 @@ export const Navbar: React.FC = () => {
 
       {mobileMenuOpen && (
         <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
-          {navLinks.map((link) => (
+          {navItems.map((link) => (
             <Link
               key={link.href}
               href={link.href}

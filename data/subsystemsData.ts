@@ -5,29 +5,30 @@ export const subsystemsData: Subsystem[] = [
     id: 'subsystem-1',
     slug: 'robotics-plant-tracking',
     category: 'ROBOTICS_NAVIGATION',
-    title: 'Autonomous Navigation & RFID Plant Tracking',
-    subtitle: 'Closed-loop line navigation and vertical canopy gantry scanner',
+    title: 'Autonomous Robotics & RFID Plant Tracking',
+    subtitle: 'Differential drive row navigation and vertical canopy gantry scanner',
     leadInvestigator: 'Peiris P.S.S. & Wijethunga T.W.M.J.C.',
-    abstract: 'Eliminates human manual inspections by employing a 4WD differential-drive robot that tracks polytunnel rows within ±1 cm deviation and captures multi-height vertical canopy profiles via a NEMA 12 stepper gantry.',
+    abstract: 'Replaces labor-intensive manual inspections with an autonomous 4WD mobile robot. The platform navigates polytunnel pathways using underside infrared sensors (lateral deviation ±1 cm), registers plants via base-mounted 13.56 MHz RFID tags, and traverses vertical foliage using a motorized lead-screw gantry.',
     hardwareStack: [
-      { component: 'Microcontroller', specification: 'Espressif ESP32-WROOM-32' },
-      { component: 'Drive Train', specification: '4x DC Gear Motors + 2x BTS7960 43A Drivers' },
-      { component: 'Track Sensors', specification: 'Dual Analog Infrared Sensors (Differential Feedback)' },
-      { component: 'Plant Identification', specification: 'MFRC522 13.56MHz RFID Reader + Passive Plant Base Tags' },
-      { component: 'Vertical Gantry', specification: '0.5m Threaded Rod + 0.75m Guide + NEMA 12 Stepper (A4988 1/16 Microstepping)' },
-      { component: 'Power Supply', specification: '4S 18650 Li-ion 12V 5000mAh + Isolated Step-Down Buck Converters' }
+      { component: 'Microcontroller', specification: 'Espressif ESP32 32-bit Microcontroller' },
+      { component: 'Chassis & Drive', specification: '4WD Custom Acrylic Chassis (30cm x 35cm x 70cm) with 4x DC Gear Motors' },
+      { component: 'Motor Drivers', specification: '2x BTS7960 43A High-Current H-Bridge Drivers' },
+      { component: 'Navigation Sensors', specification: 'Dual Analog Infrared Line-Tracking Sensors' },
+      { component: 'Plant Identification', specification: 'MFRC522 13.56 MHz RFID Reader + Base Passive RFID Tags' },
+      { component: 'Vertical Gantry', specification: '0.5m Threaded Rod + 0.75m Rail driven by NEMA 12 Stepper & A4988 Driver' },
+      { component: 'Power Architecture', specification: '4S 18650 Li-ion 12V 5000mAh with Step-Down Buck Converters' }
     ],
     softwareStack: [
-      { layer: 'Firmware', technology: 'C++ / FreeRTOS / ESP-IDF' },
-      { layer: 'Cloud Link', technology: 'Google Firebase Realtime REST / Firestore Webhooks' },
-      { layer: 'Operator App', technology: 'React Native (iOS/Android) Remote Telemetry' }
+      { layer: 'Embedded Firmware', technology: 'C++ / FreeRTOS state machine (LINE_FOLLOW, STEPPER_SCAN, ACTUATION)' },
+      { layer: 'Cloud Integration', technology: 'Firebase REST API & Firestore Event Listeners' },
+      { layer: 'State Machine', technology: 'Deterministic event loop handling scan positions A, B, and C' }
     ],
     keyContributions: [
-      '100% plant stop accuracy across all designated RFID tags during field validation trials.',
-      'Maintained consistent ±1 cm lateral line tracking along 8-meter greenhouse test beds.',
-      'Overcame tall vertical cucumber crop occlusion through automated 3-tier gantry image capture.'
+      '100% stop and identification accuracy at designated plant-base RFID tags during field validation trials.',
+      'Maintained consistent ±1 cm lateral line-tracking deviation across 8-meter greenhouse test beds.',
+      'Resolved vertical occlusion in tall cucumber vines using a multi-stop stepper gantry mechanism.'
     ],
-    imagePath: '/images/hardware/robot-chassis.jpg'
+    imagePath: '/images/subsystems/robotics-chassis.jpg'
   },
   {
     id: 'subsystem-2',
@@ -36,75 +37,76 @@ export const subsystemsData: Subsystem[] = [
     title: 'Hybrid AI Pathology & Targeted Foliar Spraying',
     subtitle: 'YOLOv8 leaf region isolation and Mask R-CNN severity segmentation',
     leadInvestigator: 'Chandrasekara C.M.D.D.',
-    abstract: 'Transforms traditional broad-spectrum blanket chemical spraying into plant-level micro-dosing by analyzing foliar health using a two-stage computer vision model and activating dual chemical pumps for specific fungal conditions.',
+    abstract: 'Replaces indiscriminate blanket chemical spraying with targeted plant-level micro-dosing. A two-stage hybrid computer vision pipeline localizes leaves and segments foliar disease lesions, driving directional micro-pumps to spray Mancozeb for downy mildew or Hexaconazole for powdery mildew while routing water stress to mobile alerts.',
     hardwareStack: [
-      { component: 'Chemical Pumps', specification: '2x 5V DC Diaphragm Liquid Pumps' },
-      { component: 'Pump Driver', specification: 'L298N Dual H-Bridge Motor Controller' },
-      { component: 'Actuator Vectoring', specification: 'Micro Servo Pan/Tilt Directional Nozzle' },
-      { component: 'Imaging Unit', specification: 'Gantry-Mounted HD Optical Sensor (1280x720)' }
+      { component: 'Chemical Delivery', specification: '2x 5V DC Diaphragm Liquid Pumps' },
+      { component: 'Pump Driver', specification: 'L298N Dual H-Bridge Motor Driver' },
+      { component: 'Nozzle Vectoring', specification: 'Micro Servo Pan/Tilt Directional Spray Nozzle' },
+      { component: 'Optics', specification: 'Gantry-Mounted HD Optical Sensor (1280x720)' }
     ],
     softwareStack: [
       { layer: 'Leaf Isolation', technology: 'YOLOv8 Single-Pass Object Detection' },
-      { layer: 'Pathology & Masking', technology: 'Mask R-CNN Instance Segmentation' },
-      { layer: 'Chemical Logic Engine', technology: 'Python 3.11 / OpenCV / Decision Matrix' }
+      { layer: 'Pathology Segmentation', technology: 'Mask R-CNN Instance Segmentation' },
+      { layer: 'Decision Logic', technology: 'Python 3.11 OpenCV severity index calculator: (Infected Pixels / Total Leaf Pixels) * 100' },
+      { layer: 'Cloud Sync', technology: 'Firebase Realtime Event Dispatcher' }
     ],
     keyContributions: [
-      'Directly achieved an 80% reduction in agrochemical usage compared to blanket spraying.',
-      'Achieved 96.97% overall classification accuracy across healthy, mildew, and stress classes.',
-      'Eliminated unnecessary spraying by separating water stress alerts from fungal infections.'
+      'Demonstrated an approximate 80% reduction in chemical volume compared to blanket spraying.',
+      'Achieved 96.97% overall accuracy across healthy leaves, downy mildew, powdery mildew, and water stress.',
+      'Integrated confidence-based filtering to prevent accidental spraying under uncertain optical conditions.'
     ],
-    imagePath: '/images/ai/downy-mildew.jpg'
+    imagePath: '/images/subsystems/ai-disease-detection.jpg'
   },
   {
     id: 'subsystem-3',
     slug: 'fruit-sizing-phenology',
     category: 'HARVEST_PHENOLOGY',
-    title: 'Computer Vision Fruit Sizing & Phenology Trigger',
-    subtitle: 'Ultrasonic depth fusion fruit detection and YOLOv8 flower stage detection',
+    title: 'Fruit Detection, Ripeness Sizing & Phenology Trigger',
+    subtitle: 'Ultrasonic depth fusion fruit sizing and YOLOv8 flower stage detection',
     leadInvestigator: 'Thotahewa A.H.T.P.P.',
-    abstract: 'Delivers non-destructive harvest estimation by fusing YOLOv8 cucumber bounding box coordinates with ultrasonic depth sensor distance measurements, alongside automated flower detection for growth phase tracking.',
+    abstract: 'Overcomes the challenge of green salad cucumber maturity estimation through geometric sensor fusion. The system combines YOLOv8 bounding boxes with ultrasonic depth measurements to determine real-world dimensions (15-16 cm length, 2.5-3.0 cm diameter), while a flower detection model automatically flags the onset of the flowering growth phase.',
     hardwareStack: [
-      { component: 'Distance Ranging', specification: 'HC-SR04 Ultrasonic Distance Sensor' },
-      { component: 'Optics', specification: 'Mobile-integrated RGB Camera Module' },
-      { component: 'Processing Core', specification: 'Edge AI Gateway Interface' }
+      { component: 'Depth Ranging', specification: 'HC-SR04 Ultrasonic Distance Sensor' },
+      { component: 'Image Acquisition', specification: 'High-Resolution Mobile Optical Sensor' },
+      { component: 'Edge Processing', specification: 'External Python Inference Bridge' }
     ],
     softwareStack: [
-      { layer: 'Fruit Detection', technology: 'YOLOv8 Object Detection (Trained on 891 images)' },
-      { layer: 'Flower Detection', technology: 'YOLOv8 Phenological Model (Trained on 798 images)' },
-      { layer: 'Spatial Calculation', technology: 'Pixel-to-Centimeter Depth Projection Geometry' }
+      { layer: 'Fruit Detection', technology: 'YOLOv8 Object Detection Model (Trained on 891 polytunnel images)' },
+      { layer: 'Flower Detection', technology: 'YOLOv8 Phenological Model (Trained on 798 Roboflow-annotated images)' },
+      { layer: 'Sizing Algorithm', technology: 'Ultrasonic distance-assisted bounding box pixel-to-centimeter transformation' }
     ],
     keyContributions: [
-      'Accurate harvest-ready classification for salad cucumbers (15-16 cm length, 2.5-3.0 cm diameter).',
-      'YOLOv8 fruit detection achieved 0.9697 mAP@0.5 and 0.9190 precision under complex foliage.',
-      'YOLOv8 flower detection model (0.941 mAP@0.5) acts as an automatic biological trigger for fertigation.'
+      'Enabled non-destructive harvest estimation for salad cucumbers without relying on fruit color.',
+      'Achieved an mAP@0.5 of 0.9697 and precision of 0.9190 for cucumber fruit localization.',
+      'Provided an automated biological trigger via flower detection (0.941 mAP@0.5) to update fertigation profiles.'
     ],
-    imagePath: '/images/ai/fruit-sizing.jpg'
+    imagePath: '/images/subsystems/fruit-sizing-ultrasonic.jpg'
   },
   {
     id: 'subsystem-4',
     slug: 'fertigation-lora-telemetry',
     category: 'FERTIGATION_TELEMETRY',
     title: 'Precision Fertigation & LoRa Environmental Telemetry',
-    subtitle: 'Soil NPK sensing, automated 3-tub mixer, and dual-sensor anomaly detection',
+    subtitle: 'Soil NPK monitoring, automated 3-tub mixer, and dual-sensor anomaly verification',
     leadInvestigator: 'Wijethunga T.W.M.J.C. & Peiris P.S.S.',
-    abstract: 'Enables responsive plant nutrition through real-time soil NPK monitoring and automated load-cell-based nutrient dispensing, while distributed LoRa sensor nodes detect ambient greenhouse microclimate anomalies.',
+    abstract: 'Delivers dynamic plant nutrition and robust greenhouse telemetry. Measures root-zone NPK values in real time, prepares stage-based nutrient batches using 3 solenoid pumps and precision load cells, and monitors greenhouse temperature and humidity over long-range LoRa links with automated sensor anomaly checking.',
     hardwareStack: [
-      { component: 'Soil Sensing', specification: 'Optical Soil NPK Industrial Sensor Probe' },
-      { component: 'Nutrient Dispensing', specification: '3x Solenoid Pumps + 3x Precision Load Cells' },
-      { component: 'Mixing Unit', specification: 'Motorized Mechanical Stirred Central Reservoir' },
-      { component: 'Long-Range RF', specification: 'SX1278 LoRa Transceiver Nodes (433/868 MHz)' },
-      { component: 'Local Display', specification: '0.96-inch I2C OLED Display Module' }
+      { component: 'Soil Sensing', specification: 'Industrial Optical Soil NPK Sensor Probe' },
+      { component: 'Nutrient Dispensing', specification: '3x Solenoid Pumps + 3x Precision Strain-Gauge Load Cells' },
+      { component: 'Mixing System', specification: 'Mixing Barrel with Motorized Mechanical Stirrer' },
+      { component: 'Wireless Radio', specification: 'SX1278 LoRa Transceivers (433/868 MHz)' },
+      { component: 'Local UI', specification: '0.96-inch I2C OLED Display' }
     ],
     softwareStack: [
-      { layer: 'Embedded Node', technology: 'Arduino C / Low-Power Sleep Logic' },
-      { layer: 'Anomaly Detection', technology: 'Dual-sensor threshold comparison (|T1 - T2|, |H1 - H2|)' },
-      { layer: 'Control Integration', technology: 'Firebase Cloud Functions & React Native Dashboard' }
+      { layer: 'Firmware', technology: 'Arduino C++ Embedded Controller' },
+      { layer: 'Anomaly Algorithm', technology: 'Threshold-based dual-sensor comparator (|T1 - T2|, |H1 - H2|)' },
+      { layer: 'Cloud & UI', technology: 'Firebase Firestore & React Native Mobile App with Manual Overrides' }
     ],
     keyContributions: [
-      'Automated transition between vegetative and flowering NPK recipes triggered by vision system.',
-      'High long-range radio stability inside metal/foil greenhouse tunnels where Wi-Fi drops out.',
-      'Automated anomaly rejection prevents faulty sensor readings from skewing irrigation actions.'
+      'Automated transition between vegetative and flowering NPK recipes triggered by vision system inputs.',
+      'Ensured dependable telemetry inside metal-frame, plastic-clad polytunnels where Wi-Fi degrades.',
+      'Integrated automated anomaly rejection to prevent faulty sensor readings from skewing irrigation decisions.'
     ],
-    imagePath: '/images/fertigation/automated-mixer.jpg'
+    imagePath: '/images/subsystems/automated-mixer-tubes.jpg'
   }
 ];

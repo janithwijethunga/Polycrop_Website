@@ -5,31 +5,31 @@ export const systemMetrics: ResearchMetric[] = [
     label: 'Agrochemical Reduction',
     value: '80%',
     baseline: '100% (Conventional Blanket Spraying)',
-    significance: 'Targeted spraying applies Mancozeb/Hexaconazole strictly to segmented diseased foliar regions.'
+    significance: 'Targeted micro-dosing applies fungicide only to segmented diseased foliar regions[cite: 100].'
   },
   {
     label: 'Plant Localization Accuracy',
     value: '100%',
-    baseline: '70% - 90% (Standard RC522 dynamic specs)',
-    significance: 'Closed-loop line navigation stops drive motors reliably over plant-base RFID tags.'
+    baseline: '70% - 90% (Standard dynamic RC522 specs)',
+    significance: 'Integration of closed-loop line navigation and RFID interrupts ensures zero missed plants[cite: 100].'
   },
   {
-    label: 'Lateral Path Tracking Deviation',
+    label: 'Line Tracking Deviation',
     value: '±1 cm',
     baseline: '±5 cm - 10 cm (Manual / Open-loop guidance)',
-    significance: 'Differential drive feedback keeps the robot centered in narrow polytunnel rows.'
+    significance: 'Differential drive closed-loop control keeps the robot centered in narrow polytunnel rows[cite: 100].'
   },
   {
-    label: 'Continuous Field Operation',
+    label: 'Continuous Operating Runtime',
     value: '2.0 Hours',
-    baseline: '45 mins (Unregulated battery systems)',
-    significance: '4S 18650 Li-ion configuration with buck converters powers drive, logic, and pumps.'
+    baseline: '45 mins (Unregulated single-rail supplies)',
+    significance: '4S 18650 Li-ion battery bank with isolated step-down buck converters powers drive, logic, and pumps[cite: 100].'
   }
 ];
 
 export const diseaseModelMetrics: ModelPerformance[] = [
   {
-    classOrModel: 'Downy Mildew (Fungal)',
+    classOrModel: 'Downy Mildew (Foliar Fungal)',
     precision: 0.9000,
     recall: 0.9130,
     f1Score: 0.9065,
@@ -37,7 +37,7 @@ export const diseaseModelMetrics: ModelPerformance[] = [
     metricType: 'Accuracy'
   },
   {
-    classOrModel: 'Powdery Mildew (Fungal)',
+    classOrModel: 'Powdery Mildew (Foliar Fungal)',
     precision: 0.9000,
     recall: 0.9091,
     f1Score: 0.9045,
@@ -45,7 +45,7 @@ export const diseaseModelMetrics: ModelPerformance[] = [
     metricType: 'Accuracy'
   },
   {
-    classOrModel: 'Water Stress (Abiotic)',
+    classOrModel: 'Water Stress (Abiotic Stress)',
     precision: 0.9000,
     recall: 1.0000,
     f1Score: 0.9474,

@@ -9,9 +9,23 @@ const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' });
 
 export const metadata: Metadata = {
   title: 'Polycrop | IoT & Robotics Smart Polytunnel Research',
-  description: 'An integrated IoT, robotics, and deep learning platform for precision cucumber disease detection, targeted spraying, and adaptive fertigation in Sri Lanka.',
-  keywords: ['Smart Agriculture', 'Cucumber Cultivation', 'Agricultural Robotics', 'YOLOv8', 'Mask R-CNN', 'LoRa', 'SLIIT Research'],
-  authors: [{ name: 'Janith Wijethunga' }, { name: 'P.S.S. Peiris' }, { name: 'C.M.D.D. Chandrasekara' }, { name: 'A.H.T.P.P. Thotahewa' }]
+  description:
+    'An integrated IoT, robotics, and deep learning platform for precision cucumber disease detection, targeted spraying, and adaptive fertigation in Sri Lanka.',
+  keywords: [
+    'Smart Agriculture',
+    'Cucumber Cultivation',
+    'Agricultural Robotics',
+    'YOLOv8',
+    'Mask R-CNN',
+    'LoRa',
+    'SLIIT Research',
+  ],
+  authors: [
+    { name: 'P.S.S. Peiris' },
+    { name: 'T.W.M.J.C. Wijethunga' },
+    { name: 'C.M.D.D. Chandrasekara' },
+    { name: 'A.H.T.P.P. Thotahewa' },
+  ],
 };
 
 export default function RootLayout({

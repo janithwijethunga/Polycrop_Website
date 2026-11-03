@@ -1,4 +1,4 @@
-export type ModuleCategory = 
+export type ModuleCategory =
   | 'ROBOTICS_NAVIGATION'
   | 'COMPUTER_VISION_PATHOLOGY'
   | 'HARVEST_PHENOLOGY'
@@ -49,11 +49,31 @@ export interface TeamMember {
   };
 }
 
-export interface AcademicReference {
-  id: number;
-  authors: string;
+export interface AcademicSupervisor {
+  name: string;
+  role: string;
+  department: string;
+  institution: string;
+  email: string;
+}
+
+export interface ResearchGapItem {
+  area: string;
+  traditional: string;
+  limitation: string;
+  polycropSolution: string;
+}
+
+export interface ArchitectureLayer {
+  layer: string;
+  components: string;
+  function: string;
+}
+
+export interface GalleryItem {
+  id: string;
   title: string;
-  source: string;
-  year: number;
-  doi?: string;
+  category: 'robotics' | 'ai' | 'polytunnel' | 'mobile_app';
+  imagePath: string;
+  description: string;
 }

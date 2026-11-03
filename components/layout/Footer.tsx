@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { navItems } from '@/data/navigation';
 
 export const Footer: React.FC = () => {
   return (
@@ -12,27 +13,31 @@ export const Footer: React.FC = () => {
               <span className="font-bold text-slate-900 tracking-tight">POLYCROP RESEARCH PROJECT</span>
             </div>
             <p className="text-xs text-slate-500 leading-relaxed max-w-md">
-              A comprehensive IoT, robotics, and artificial intelligence ecosystem designed for cucumber polytunnels in Sri Lanka.
+              An integrated IoT, robotics, and artificial intelligence ecosystem designed for cucumber polytunnels in Sri Lanka.
               Developed at the Department of Information Technology, Sri Lanka Institute of Information Technology (SLIIT).
             </p>
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3">Project Modules</h4>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3">Quick Navigation</h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/subsystems" className="hover:text-emerald-700">Differential Line Robot & RFID</Link></li>
-              <li><Link href="/subsystems" className="hover:text-emerald-700">YOLOv8 + Mask R-CNN AI</Link></li>
-              <li><Link href="/subsystems" className="hover:text-emerald-700">Fruit Ripeness & Depth Fusion</Link></li>
-              <li><Link href="/subsystems" className="hover:text-emerald-700">NPK Mixing & LoRa Telemetry</Link></li>
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="hover:text-emerald-700 transition-colors">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3">Supervision</h4>
-            <ul className="space-y-2 text-xs text-slate-500">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-900 mb-3">Supervision & Degree</h4>
+            <ul className="space-y-1.5 text-xs text-slate-500">
               <li>Supervisor: Ms. Wishalya Tissera</li>
               <li>Co-Supervisor: Ms. Chathushki Chathumali</li>
-              <li className="pt-2 text-slate-400">Published April 2026</li>
+              <li className="pt-2 text-slate-400">BSc (Hons) in Information Technology</li>
+              <li className="text-slate-400">SLIIT Special Honors Thesis (April 2026)</li>
             </ul>
           </div>
         </div>
